@@ -1,0 +1,6 @@
+organization=iim3tz
+projectKey=iim3tz_student-grade-api
+serverUrl=https://sonarcloud.io
+dashboardUrl=https://sonarcloud.io/dashboard?id=iim3tz_student-grade-api
+ceTaskId=AaG-CnZmlI9JGMYMs5Do
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AaG-CnZmlI9JGMYMs5Do
