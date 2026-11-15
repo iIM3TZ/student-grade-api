@@ -43,8 +43,17 @@ jobs:
           DH_USER: ${{ secrets.DOCKERHUB_USERNAME }}
           DH_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
         run: |
-          printf '%s' "$DH_TOKEN" | tr -d '[:space:]' | \
-            docker login -u "$(printf '%s' "$DH_USER" | tr -d '[:space:]')" --password-stdin
+          # keep only visible ASCII characters (drops newlines, spaces, hidden unicode)
+          U="$(printf '%s' "$DH_USER" | LC_ALL=C tr -cd '[:graph:]')"
+          T="$(printf '%s' "$DH_TOKEN" | LC_ALL=C tr -cd '[:graph:]')"
+          # lengths only - the values are never printed
+          echo "username length: ${#U} (raw: ${#DH_USER})"
+          echo "token length: ${#T} (raw: ${#DH_TOKEN})"
+          if [ -z "$U" ] || [ -z "$T" ]; then
+            echo "::error::DOCKERHUB_USERNAME or DOCKERHUB_TOKEN secret is empty"
+            exit 1
+          fi
+          printf '%s' "$T" | docker login -u "$U" --password-stdin
 
       # 6) Build the Docker image and push it to Docker Hub
       - name: Build and push Docker image
