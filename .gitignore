@@ -1,0 +1,22 @@
+# Maven build output
+target/
+
+# Sonar scanner cache
+.sonar/
+.scannerwork/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.classpath
+.project
+.settings/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs and secrets
+*.log
+.env
