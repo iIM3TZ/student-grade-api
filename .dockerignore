@@ -1,0 +1,7 @@
+target/
+.sonar/
+.git/
+.idea/
+.vscode/
+*.log
+.env
